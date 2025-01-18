@@ -1,6 +1,9 @@
+import { Entity } from '@albert-ambaryan/core';
 import { User } from '@prisma/client';
+import { SALT_ROUNDS } from './user.constants';
+import { compare, genSalt, hash } from 'bcrypt';
 
-export class UserEntity implements User {
+export class UserEntity implements User, Entity<string> {
   id: string;
   email: string;
   passwordHash: string;
@@ -11,9 +14,23 @@ export class UserEntity implements User {
     this.fill(user);
   }
 
-  toObject() {
+  public async setPassword(password: string) {
+    const salt = await genSalt(SALT_ROUNDS);
+    this.passwordHash = await hash(password, salt);
+    return this;
+  }
+
+  public async validatePassword(password: string): Promise<boolean> {
+    return await compare(password, this.passwordHash);
+  }
+
+  toPlainObject() {
     return {
-      ...this
+      id: this.id,
+      email: this.email,
+      passwordHash: this.passwordHash,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
     };
   }
 
