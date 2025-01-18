@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ENV_FILE_PATH } from '../app.constants';
 import { validateEnvironment } from '../app.env-validation';
 import { AuthModule } from './auth/auth.module';
+import { jwtOptions } from './config';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -12,6 +13,7 @@ import { UserModule } from './user/user.module';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: [ENV_FILE_PATH],
+      load: [jwtOptions],
       cache: true,
       validate: validateEnvironment,
     }),
