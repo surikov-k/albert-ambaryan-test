@@ -16,6 +16,12 @@ export class UserRepository
     });
   }
 
+  public async findByEmail(email: string): Promise<User | null> {
+    return this.prisma.user.findFirst({
+      where: { email },
+    });
+  }
+
   public async create(item: UserEntity): Promise<User> {
     return this.prisma.user.create({
       data: { ...item.toPlainObject() },

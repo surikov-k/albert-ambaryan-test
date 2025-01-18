@@ -3,14 +3,14 @@ import { User } from '@prisma/client';
 import { SALT_ROUNDS } from './user.constants';
 import { compare, genSalt, hash } from 'bcrypt';
 
-export class UserEntity implements User, Entity<string> {
-  id: string;
+export class UserEntity implements Partial<User>, Entity<string> {
+  id?: string;
   email: string;
-  passwordHash: string;
-  createdAt: Date;
-  updatedAt: Date;
+  passwordHash?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 
-  constructor(user: User) {
+  constructor(user: Partial<User>) {
     this.fill(user);
   }
 
@@ -34,7 +34,7 @@ export class UserEntity implements User, Entity<string> {
     };
   }
 
-  fill(user: User) {
+  fill(user: Partial<User>) {
     this.id = user.id;
     this.email = user.email;
     this.passwordHash = user.passwordHash;

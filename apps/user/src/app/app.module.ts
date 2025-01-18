@@ -3,7 +3,6 @@ import { PrismaClientModule } from '@albert-ambaryan/models';
 import { ConfigModule } from '@nestjs/config';
 import { ENV_FILE_PATH } from '../app.constants';
 import { validateEnvironment } from '../app.env-validation';
-import { AuthModule } from './auth.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 
