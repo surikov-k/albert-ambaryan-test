@@ -3,8 +3,8 @@ POST http://localhost:3333/api/auth/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "tYt6y@example2.com",
-    "password": "123456"
+    "email": "tYt6y@example.com",
+    "password": "Password1!"
 }
 
 
@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
     "email": "tYt6y@example2.com",
-    "password": "12345"
+    "password": "123456"
 }
 
 ### Check auth
