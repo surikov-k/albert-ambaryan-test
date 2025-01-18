@@ -17,5 +17,7 @@ Content-Type: application/json
     "password": "12345"
 }
 
-
+### Check auth
+GET http://localhost:3333/api/auth HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbTYyaWc2OHcwMDAwcHh1ZGdoa3ZyemM2IiwiZW1haWwiOiJ0WXQ2eUBleGFtcGxlMi5jb20iLCJpYXQiOjE3MzcyMjQyMjQsImV4cCI6MTczNzIyNDIyN30.eo4Z0n-4xH8bRVwDGS5zCvGmwt74gdNrSoXURhRP50Y
 

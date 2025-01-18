@@ -1,7 +1,8 @@
 import { JwtPayload } from '@albert-ambaryan/types';
-import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { prepareDto } from '@albert-ambaryan/helpers';
 import { GetUserPayload } from '../common/decorators/get-user-payload.decorator';
+import { JwtAuthGuard } from '../common/guards';
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dto';
 import { UserRdo } from './rdo/user.rdo';
@@ -21,6 +22,12 @@ export class AuthController {
   async login(@Body() dto: LoginDto) {
     const { accessToken } = await this.authService.login(dto);
     return accessToken;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  public async checkAuth(@GetUserPayload() payload: JwtPayload) {
+    return prepareDto(UserRdo, payload);
   }
 
 }
