@@ -44,6 +44,41 @@
       "options": {
         "passWithNoTests": true
       }
+    },
+    "db:validate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx prisma validate --schema ./schema.prisma",
+        "cwd": "libs/shared/models/prisma"
+      }
+    },
+    "db:migrate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx prisma migrate dev --schema ./schema.prisma --skip-generate --skip-seed",
+        "cwd": "libs/shared/models/prisma"
+      }
+    },
+    "db:reset": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx prisma migrate reset --force --schema ./schema.prisma --force --skip-generate --skip-seed",
+        "cwd": "libs/shared/models/prisma"
+      }
+    },
+    "db:generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx prisma generate --schema ./schema.prisma",
+        "cwd": "libs/shared/models/prisma"
+      }
+    },
+    "db:seed": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx prisma db seed --schema ./schema.prisma",
+        "cwd": "libs/shared/models/prisma"
+      }
     }
   }
 }
