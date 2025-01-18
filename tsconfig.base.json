@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@albert-ambaryan/core": ["libs/shared/core/src/index.ts"],
       "@albert-ambaryan/helpers": ["libs/shared/helpers/src/index.ts"],
       "@albert-ambaryan/models": ["libs/shared/models/src/index.ts"],
       "@albert-ambaryan/types": ["libs/shared/types/src/index.ts"]
