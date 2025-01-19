@@ -1,13 +1,12 @@
-import { Button } from "../../../../libs/ui/src/ui/button";
+import RegisterForm from "./auth/register-form";
 
 export function App() {
   return (
-    <div className="h-screen bg-slate-800 text-white">
-      <section className="mx-auto max-w-lg py-8">
-        <h1 className="text-center text-3xl font-bold">Hola</h1>
-        <Button className="mt-8">Button</Button>
-      </section>
-    </div>
+    <section className="w-full">
+      <div className="flex h-screen items-center justify-center">
+        <RegisterForm />
+      </div>
+    </section>
   );
 }
 
