@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { loginSchema, registerSchema } from "../../schema";
+import { loginSchema } from "../../schema";
 import CardWrapper from "./card-wrapper";
 
 export default function LoginForm() {
@@ -24,9 +24,13 @@ export default function LoginForm() {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof loginSchema>) => {
+  const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     console.log(data);
   };
+
+  const { isSubmitting } = form.formState;
+
   return (
     <CardWrapper
       label="Login to your account"
@@ -74,8 +78,8 @@ export default function LoginForm() {
               )}
             />
           </div>
-          <Button className="w-full" type="submit">
-            Login
+          <Button className="w-full" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Logging in..." : "Login"}
           </Button>
         </form>
       </Form>

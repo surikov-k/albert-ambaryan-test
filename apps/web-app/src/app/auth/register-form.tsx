@@ -25,9 +25,13 @@ export default function RegisterForm() {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof registerSchema>) => {
+  const onSubmit = async (data: z.infer<typeof registerSchema>) => {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     console.log(data);
   };
+
+  const { isSubmitting } = form.formState;
+
   return (
     <CardWrapper
       label="Create an account"
@@ -95,8 +99,8 @@ export default function RegisterForm() {
               )}
             />
           </div>
-          <Button className="w-full" type="submit">
-            Register
+          <Button className="w-full" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Registering..." : "Register"}
           </Button>
         </form>
       </Form>
