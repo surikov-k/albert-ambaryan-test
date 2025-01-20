@@ -13,7 +13,6 @@ export class IsEmailUniqueConstraint implements ValidatorConstraintInterface {
   constructor(private readonly userRepository: UserRepository) {}
 
   async validate(email: string): Promise<boolean> {
-    console.log('IsEmailUnique', email);
     const user = await this.userRepository.findByEmail(email);
     return !user;
   }
@@ -26,7 +25,7 @@ export function IsEmailUnique(validationOptions?: ValidationOptions) {
       propertyName,
       options: validationOptions,
       constraints: [],
-      validator: IsEmailUniqueConstraint
-    })
-  }
+      validator: IsEmailUniqueConstraint,
+    });
+  };
 }

@@ -1,3 +1,4 @@
+import { AUTH_API_URL } from "@albert-ambaryan/helpers";
 import { Button } from "@albert-ambaryan/ui/button";
 import {
   Form,
@@ -10,14 +11,21 @@ import {
 import { Input } from "@albert-ambaryan/ui/input";
 import { PasswordInput } from "@albert-ambaryan/ui/password-input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EyeIcon, MailIcon } from "lucide-react";
+import { MailIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { registerSchema } from "../../schema";
 import CardWrapper from "./card-wrapper";
+import useFormSubmit from "./hooks/use-form-submit";
 
-export default function RegisterForm() {
+interface LoginFormsProps {
+  onRegister: () => void;
+}
+
+export default function RegisterForm({ onRegister }: LoginFormsProps) {
+  const { handleFormSubmit } = useFormSubmit();
+
   const form = useForm({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -28,11 +36,15 @@ export default function RegisterForm() {
   });
 
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    console.log(data);
+    await handleFormSubmit(
+      `${AUTH_API_URL}/register`,
+      data,
+      form.setError,
+      onRegister
+    );
   };
 
-  const { isSubmitting } = form.formState;
+  const { isSubmitting, errors } = form.formState;
 
   return (
     <CardWrapper
@@ -102,6 +114,13 @@ export default function RegisterForm() {
               )}
             />
           </div>
+
+          {errors.root && (
+            <p className="text-sm font-medium text-destructive">
+              {errors.root.message}
+            </p>
+          )}
+
           <Button className="w-full" type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Registering..." : "Register"}
           </Button>

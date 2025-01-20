@@ -9,12 +9,12 @@ export default function useFormSubmit() {
     url: string,
     data: any,
     setError: UseFormSetError<any>,
-    onSuccess: () => void
+    onSuccess: (token?: string) => void
   ) => {
     try {
       const response = await axios.post(url, data);
-      if (response.status === 200) {
-        onSuccess();
+      if (response.status >= 200 && response.status < 300) {
+        onSuccess(response.data);
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {

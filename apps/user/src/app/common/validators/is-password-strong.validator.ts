@@ -3,16 +3,16 @@ import {
   registerDecorator,
   ValidationOptions,
   ValidatorConstraint,
-  ValidatorConstraintInterface
+  ValidatorConstraintInterface,
 } from 'class-validator';
 import { AuthError, passwordRegex } from '../../auth/auth.constants';
 
 @ValidatorConstraint()
 @Injectable()
-export class IsPasswordStrongConstraint implements ValidatorConstraintInterface {
-
+export class IsPasswordStrongConstraint
+  implements ValidatorConstraintInterface
+{
   validate(password: string) {
-    console.log(password, passwordRegex.test(password));
     return typeof password === 'string' && passwordRegex.test(password);
   }
 

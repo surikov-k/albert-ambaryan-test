@@ -6,10 +6,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 
 @Injectable()
 export class JwtAccessStrategy extends PassportStrategy(Strategy) {
-  constructor(
-    private readonly configService: ConfigService,
-  ) {
-
+  constructor(private readonly configService: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: true,
@@ -19,7 +16,6 @@ export class JwtAccessStrategy extends PassportStrategy(Strategy) {
   }
 
   public async validate(_req, payload: JwtPayload) {
-    console.log(payload);
     return payload;
   }
 }

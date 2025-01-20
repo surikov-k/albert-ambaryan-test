@@ -20,7 +20,7 @@ import CardWrapper from "./card-wrapper";
 import useFormSubmit from "./hooks/use-form-submit";
 
 interface LoginFormsProps {
-  onLogin: () => void;
+  onLogin: (token?: string) => void;
 }
 
 export default function LoginForm({ onLogin }: LoginFormsProps) {

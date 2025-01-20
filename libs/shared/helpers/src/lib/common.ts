@@ -1,6 +1,8 @@
 import { ClassTransformOptions, plainToInstance } from 'class-transformer';
+import { type ClassValue, clsx } from 'clsx';
+import { jwtDecode } from 'jwt-decode';
 
-type PlainObject = Record<string, unknown>;
+import { twMerge } from 'tailwind-merge';
 
 export const AUTH_API_URL = 'http://localhost:3333/api/auth';
 
@@ -27,9 +29,15 @@ export function prepareDto<T, V>(
   });
 }
 
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+export function decodeEmailFromJWT(token: string): { email: string } {
+  try {
+    return jwtDecode<{ email: string }>(token);
+  } catch (error) {
+    console.error('Failed to decode token:', error);
+    return { email: '' };
+  }
 }
