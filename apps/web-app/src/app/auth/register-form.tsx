@@ -38,7 +38,7 @@ export default function RegisterForm() {
     <CardWrapper
       label="Create an account"
       title="Register"
-      backButtonHref="/auth/login"
+      backButtonHref="/login"
       backButtonLabel="Already have an account? Login here."
     >
       <Form {...form}>

@@ -1,23 +1,65 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
 
-import RegisterForm from "./auth/register-form";
+import { Button } from "@albert-ambaryan/ui/button";
+import {
+  Link,
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
+
+import LoginPage from "./pages/login-page";
+import RegisterPage from "./pages/register-page";
+
+const API_URL = "http://localhost:3333/api/auth/";
 
 export function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("aa-token")
+  );
+
+  const handleLogout = () => {
+    localStorage.removeItem("aa-token");
+    setIsLoggedIn(false);
+  };
+
   return (
-    <section className="flex min-h-screen w-full items-center justify-center bg-gradient-to-bl from-gray-50 to-gray-100 p-4">
-      <motion.div
-        className="flex w-full justify-center"
-        initial={{ opacity: 0, scale: 0.8, y: -50 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{
-          duration: 0.6,
-          delay: 0.3,
-          ease: "easeOut",
-        }}
-      >
-        <RegisterForm />
-      </motion.div>
-    </section>
+    <>
+      <nav>
+        {isLoggedIn ? (
+          <Button onClick={handleLogout}>Logout</Button>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
+      </nav>
+      <Routes>
+        <Route
+          path="/login"
+          element={
+            isLoggedIn ? (
+              <Navigate to="/" />
+            ) : (
+              <LoginPage onLogin={() => setIsLoggedIn(true)} />
+            )
+          }
+        />
+        <Route
+          path="register"
+          element={isLoggedIn ? <Navigate to="/" /> : <RegisterPage />}
+        />
+        <Route
+          path="/"
+          element={
+            isLoggedIn ? (
+              <h1>Welcome to the app!. You are logged in.</h1>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      </Routes>
+    </>
   );
 }
 

@@ -13,7 +13,7 @@ export class AuthService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
   ) {}
 
   public async register(dto: RegisterDto) {
@@ -37,7 +37,7 @@ export class AuthService {
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
-      throw new UnauthorizedException(AuthError.NOT_FOUND);
+      throw new UnauthorizedException(AuthError.WRONG_CREDENTIALS);
     }
 
     const entity = new UserEntity(user);

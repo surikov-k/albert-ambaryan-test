@@ -2,6 +2,8 @@ import { ClassTransformOptions, plainToInstance } from 'class-transformer';
 
 type PlainObject = Record<string, unknown>;
 
+export const AUTH_API_URL = 'http://localhost:3333/api/auth';
+
 export function prepareDto<T, V>(
   DtoClass: new () => T,
   plainObject: V,
