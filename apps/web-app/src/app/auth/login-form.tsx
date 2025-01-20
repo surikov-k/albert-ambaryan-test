@@ -11,19 +11,21 @@ import {
 import { Input } from "@albert-ambaryan/ui/input";
 import { PasswordInput } from "@albert-ambaryan/ui/password-input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { MailIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { loginSchema } from "../../schema";
 import CardWrapper from "./card-wrapper";
+import useFormSubmit from "./hooks/use-form-submit";
 
 interface LoginFormsProps {
   onLogin: () => void;
 }
 
 export default function LoginForm({ onLogin }: LoginFormsProps) {
+  const { handleFormSubmit } = useFormSubmit();
+
   const form = useForm({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -33,46 +35,12 @@ export default function LoginForm({ onLogin }: LoginFormsProps) {
   });
 
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
-    try {
-      const response = await axios.post(`${AUTH_API_URL}/login`, data);
-      if (response.status === 200) {
-        onLogin();
-      }
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          if (error.response.data.errors) {
-            error.response.data.errors.forEach(
-              (error: { field: string; message: string }) => {
-                form.setError(
-                  error.field as keyof z.infer<typeof loginSchema>,
-                  {
-                    type: "server",
-                    message: error.message,
-                  }
-                );
-              }
-            );
-          } else {
-            form.setError("root", {
-              type: "server",
-              message:
-                error.response.data.message || "An error occurred during login",
-            });
-          }
-        } else {
-          form.setError("root", {
-            type: "server",
-            message: "Network error. Please try again.",
-          });
-        }
-      } else {
-        form.setError("root", {
-          type: "server",
-          message: "An unexpected error occurred. Please try again later.",
-        });
-      }
-    }
+    await handleFormSubmit(
+      `${AUTH_API_URL}/login`,
+      data,
+      form.setError,
+      onLogin
+    );
   };
 
   const { isSubmitting, errors } = form.formState;
