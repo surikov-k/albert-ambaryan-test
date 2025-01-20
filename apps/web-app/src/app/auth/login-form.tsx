@@ -8,7 +8,9 @@ import {
   FormMessage,
 } from "@albert-ambaryan/ui/form";
 import { Input } from "@albert-ambaryan/ui/input";
+import { PasswordInput } from "@albert-ambaryan/ui/password-input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { MailIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -53,6 +55,7 @@ export default function LoginForm() {
                       id="email"
                       type="email"
                       placeholder="Enter your email"
+                      suffix={<MailIcon className="size-5 text-gray-300" />}
                     />
                   </FormControl>
                   <FormMessage />
@@ -66,7 +69,7 @@ export default function LoginForm() {
                 <FormItem>
                   <FormLabel htmlFor="password">Password</FormLabel>
                   <FormControl>
-                    <Input
+                    <PasswordInput
                       {...field}
                       id="password"
                       type="password"
