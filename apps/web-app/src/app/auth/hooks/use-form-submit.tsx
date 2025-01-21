@@ -12,7 +12,9 @@ export default function useFormSubmit() {
     onSuccess: (token?: string) => void
   ) => {
     try {
-      const response = await axios.post(url, data);
+      const response = await axios.post(url, data, {
+        withCredentials: true,
+      });
       if (response.status >= 200 && response.status < 300) {
         onSuccess(response.data);
       }

@@ -5,6 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import { twMerge } from 'tailwind-merge';
 
 export const AUTH_API_URL = 'http://localhost:3333/api/auth';
+export const CAPTCHA_API_URL = 'http://localhost:3333/api/captcha';
 
 export function prepareDto<T, V>(
   DtoClass: new () => T,

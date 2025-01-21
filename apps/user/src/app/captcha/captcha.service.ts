@@ -3,7 +3,7 @@ import * as svgCaptcha from 'svg-captcha';
 
 const NUMBER_OF_CHARS = 5;
 const NUMBER_OF_NOISE_LINES = 2;
-const BACKGROUND_COLOR = '#ebccff';
+const BACKGROUND_COLOR = '#FFFFFF';
 
 @Injectable()
 export class CaptchaService {

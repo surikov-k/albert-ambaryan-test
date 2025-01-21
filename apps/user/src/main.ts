@@ -13,7 +13,10 @@ import { AppModule } from './app/app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.enableCors();
+  app.enableCors({
+    origin: 'http://localhost:4200',
+    credentials: true,
+  });
 
   app.use(
     session({
@@ -29,6 +32,7 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
+
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
