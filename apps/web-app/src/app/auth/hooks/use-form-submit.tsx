@@ -4,7 +4,7 @@ import { z } from "zod";
 
 import { loginSchema } from "../../../schema";
 
-export default function useFormSubmit() {
+export function useFormSubmit() {
   const handleFormSubmit = async (
     url: string,
     data: any,

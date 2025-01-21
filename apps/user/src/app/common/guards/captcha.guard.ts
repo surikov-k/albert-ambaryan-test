@@ -21,7 +21,9 @@ export class CaptchaGuard implements CanActivate {
     const sessionCaptcha = (request.session as CustomSession).captcha;
 
     if (bodyCaptcha !== sessionCaptcha) {
-      throw new UnauthorizedException('Invalid captcha');
+      throw new UnauthorizedException(
+        'Verification code is incorrect, try again',
+      );
     }
 
     return true;

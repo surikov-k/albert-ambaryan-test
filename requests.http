@@ -1,12 +1,12 @@
 ### Register a new user
 POST http://localhost:3333/api/auth/register HTTP/1.1
 Content-Type: application/json
-Cookie: connect.sid=s%3ATSKqL8W5F-KpJNIRFATBOB1HKjpuGEUM.MrdUg0m0I3fqhGXXSWq8TR%2B2yn%2BHYNafw8MKBaJ%2BkKc
+Cookie: connect.sid=s%3ACGrA-o2R4cdAo2hgPTzDVrqpDckqTDKk.GNFMT8bE4L2s4UpAtSG5%2B0ckBTjv3O%2FHKsQfQIhMP4U
 
 {
-  "email": "tYt6y@example.com",
+  "email": "tYt6y@example222.com",
   "password": "Password1!",
-  "captcha": "0uTbN"
+  "captcha": "xuU1o"
 }
 
 

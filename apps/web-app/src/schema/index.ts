@@ -26,4 +26,7 @@ export const loginSchema = z.object({
     message: "Please enter a valid email address",
   }),
   password: z.string(),
+  captcha: z.string().min(1, {
+    message: "Please enter a verification code",
+  }),
 });

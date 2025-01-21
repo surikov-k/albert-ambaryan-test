@@ -17,12 +17,12 @@ import { UserRdo } from './rdo/user.rdo';
 import { Session as ExpressSession } from 'express-session';
 
 @Controller('auth')
-@UseGuards(CaptchaGuard)
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  async register(@Body() dto: RegisterDto) {
+  @UseGuards(CaptchaGuard)
+  async register(@Session() session: ExpressSession, @Body() dto: RegisterDto) {
     const { accessToken } = await this.authService.register(dto);
     return accessToken;
   }

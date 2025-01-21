@@ -17,7 +17,7 @@ import { z } from "zod";
 
 import { registerSchema } from "../../schema";
 import CardWrapper from "./card-wrapper";
-import useFormSubmit from "./hooks/use-form-submit";
+import { useCaptcha, useFormSubmit } from "./hooks";
 
 interface LoginFormsProps {
   onRegister: () => void;
@@ -25,6 +25,7 @@ interface LoginFormsProps {
 
 export default function RegisterForm({ onRegister }: LoginFormsProps) {
   const { handleFormSubmit } = useFormSubmit();
+  const captcha = useCaptcha();
 
   const form = useForm({
     resolver: zodResolver(registerSchema),
@@ -32,6 +33,7 @@ export default function RegisterForm({ onRegister }: LoginFormsProps) {
       email: "",
       password: "",
       confirmPassword: "",
+      captcha: "",
     },
   });
 
@@ -107,6 +109,32 @@ export default function RegisterForm({ onRegister }: LoginFormsProps) {
                       id="confirmPassword"
                       type="password"
                       placeholder="•••"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <img
+              src={`data:image/svg+xml;utf8,${encodeURIComponent(captcha || "")}`}
+              alt="CAPTCHA"
+              className="h-24 w-full rounded-md border object-contain py-1"
+            />
+            <FormField
+              name="captcha"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="captcha">Verification</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      id="captcha"
+                      type="text"
+                      placeholder="Enter the verification code"
                     />
                   </FormControl>
                   <FormMessage />
