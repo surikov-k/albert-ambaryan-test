@@ -18,9 +18,9 @@
       "@albert-ambaryan/core": ["libs/shared/core/src/index.ts"],
       "@albert-ambaryan/helpers": ["libs/shared/helpers/src/index.ts"],
       "@albert-ambaryan/models": ["libs/shared/models/src/index.ts"],
+      "@albert-ambaryan/styles/*": ["libs/ui/src/styles/*"],
       "@albert-ambaryan/types": ["libs/shared/types/src/index.ts"],
-      "@albert-ambaryan/ui/*": ["libs/ui/src/ui/*"],
-      "@albert-ambaryan/styles/*": [ "libs/ui/src/styles/*" ]
+      "@albert-ambaryan/ui/*": ["libs/ui/src/ui/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

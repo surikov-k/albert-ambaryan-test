@@ -6,6 +6,7 @@ import { validateEnvironment } from '../app.env-validation';
 import { AuthModule } from './auth/auth.module';
 import { jwtOptions } from './config';
 import { UserModule } from './user/user.module';
+import { CaptchaModule } from './captcha/captcha.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UserModule } from './user/user.module';
     }),
     AuthModule,
     UserModule,
+    CaptchaModule,
   ],
   controllers: [],
   providers: [],
