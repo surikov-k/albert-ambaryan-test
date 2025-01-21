@@ -42,6 +42,7 @@ Thumbs.db
 .nx/workspace-data
 
 *.env
+captcha.png
 
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
