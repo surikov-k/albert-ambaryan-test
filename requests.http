@@ -1,24 +1,24 @@
 ### Register a new user
 POST http://localhost:3333/api/auth/register HTTP/1.1
 Content-Type: application/json
-Cookie: connect.sid=s%3ACGrA-o2R4cdAo2hgPTzDVrqpDckqTDKk.GNFMT8bE4L2s4UpAtSG5%2B0ckBTjv3O%2FHKsQfQIhMP4U
+Cookie: connect.sid=s%3AzbLSnav7w820nd8YWwLGg65lSGaGuAtB.I5bxply2RPy9yOmhgTpNHVvtwlfpWgoCi3DOmngG%2F5U
 
 {
-  "email": "tYt6y@example222.com",
+  "email": "test2@example.com",
   "password": "Password1!",
-  "captcha": "xuU1o"
+  "captcha": "3c2LI"
 }
 
 
 ### Login
 POST http://localhost:3333/api/auth/login HTTP/1.1
 Content-Type: application/json
-Cookie: connect.sid=s%3ATSKqL8W5F-KpJNIRFATBOB1HKjpuGEUM.MrdUg0m0I3fqhGXXSWq8TR%2B2yn%2BHYNafw8MKBaJ%2BkKc
+Cookie: connect.sid=s%3AzbLSnav7w820nd8YWwLGg65lSGaGuAtB.I5bxply2RPy9yOmhgTpNHVvtwlfpWgoCi3DOmngG%2F5U
 
 {
   "email": "Isabell88@hotmail.com",
   "password": "Password1!",
-  "captcha": "0uTbN"
+  "captcha": "3c2LI"
 }
 
 ### Check auth

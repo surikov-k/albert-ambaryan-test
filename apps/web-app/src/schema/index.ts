@@ -15,6 +15,9 @@ export const registerSchema = z
         "Password must contain at least one capital letter, one number, and one special character"
       ),
     confirmPassword: z.string(),
+    captcha: z.string().min(1, {
+      message: "Please enter a verification code",
+    }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",

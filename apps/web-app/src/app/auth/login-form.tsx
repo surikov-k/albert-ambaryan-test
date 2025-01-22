@@ -98,6 +98,7 @@ export default function LoginForm({ onLogin }: LoginFormsProps) {
 
           <div className="space-y-2">
             <img
+              id="captcha-image"
               src={`data:image/svg+xml;utf8,${encodeURIComponent(captcha || "")}`}
               alt="CAPTCHA"
               className="h-24 w-full rounded-md border object-contain py-1"
@@ -123,12 +124,20 @@ export default function LoginForm({ onLogin }: LoginFormsProps) {
           </div>
 
           {errors.root && (
-            <p className="text-sm font-medium text-destructive">
+            <p
+              id="error-message"
+              className="text-sm font-medium text-destructive"
+            >
               {errors.root.message}
             </p>
           )}
 
-          <Button className="w-full" type="submit" disabled={isSubmitting}>
+          <Button
+            id="submit-button"
+            className="w-full"
+            type="submit"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Logging in..." : "Login"}
           </Button>
         </form>
