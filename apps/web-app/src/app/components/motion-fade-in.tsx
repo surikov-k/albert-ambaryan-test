@@ -10,12 +10,13 @@ export default function MotionFadeIn({ children }: MotionFadeInProps) {
   return (
     <motion.div
       className="flex w-full justify-center"
-      initial={{ opacity: 0, scale: 0.92, y: -30 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
+      initial={{ rotateY: 90 }}
+      animate={{ rotateY: 0 }}
+      exit={{ rotateY: -90 }}
       transition={{
         duration: 0.3,
-        delay: 0.2,
-        ease: "easeOut",
+        // delay: 0.2,
+        ease: "easeInOut",
       }}
     >
       {children}

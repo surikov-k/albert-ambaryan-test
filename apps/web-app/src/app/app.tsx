@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 
 import { decodeEmailFromJWT } from "@albert-ambaryan/helpers";
 import { Button } from "@albert-ambaryan/ui/button";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import MainLayout from "./components/main-layout";
 import LoginPage from "./pages/login-page";
 import RegisterPage from "./pages/register-page";
 
 export function App() {
+  const location = useLocation();
   const [userEmail, setUserEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -37,51 +39,53 @@ export function App() {
 
   return (
     <MainLayout isLoggedIn={isLoggedIn} onLogout={handleLogout}>
-      <Routes>
-        <Route
-          path="/login"
-          element={
-            isLoggedIn ? (
-              <Navigate to="/" />
-            ) : (
-              <LoginPage onLogin={handleLogin} />
-            )
-          }
-        />
-        <Route
-          path="register"
-          element={
-            isLoggedIn ? (
-              <Navigate to="/" />
-            ) : (
-              <RegisterPage onRegister={handleLogin} />
-            )
-          }
-        />
-        <Route
-          path="/"
-          element={
-            isLoggedIn ? (
-              <div className="text-center">
-                <h1 className="flex flex-col items-center gap-1 text-3xl font-bold text-gray-800">
-                  <span>Welcome to the app!</span>
-                </h1>
-                <p className="mt-4 font-mono text-gray-600">{userEmail}</p>
-                <p>You are logged in</p>
-                <Button
-                  size="lg"
-                  className="mt-8 bg-gradient-to-r from-purple-800 to-pink-500"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </Button>
-              </div>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.key}>
+          <Route
+            path="/login"
+            element={
+              isLoggedIn ? (
+                <Navigate to="/" />
+              ) : (
+                <LoginPage onLogin={handleLogin} />
+              )
+            }
+          />
+          <Route
+            path="register"
+            element={
+              isLoggedIn ? (
+                <Navigate to="/" />
+              ) : (
+                <RegisterPage onRegister={handleLogin} />
+              )
+            }
+          />
+          <Route
+            path="/"
+            element={
+              isLoggedIn ? (
+                <div className="text-center">
+                  <h1 className="flex flex-col items-center gap-1 text-3xl font-bold text-gray-800">
+                    <span>Welcome to the app!</span>
+                  </h1>
+                  <p className="mt-4 font-mono text-gray-600">{userEmail}</p>
+                  <p>You are logged in</p>
+                  <Button
+                    size="lg"
+                    className="mt-8 bg-gradient-to-r from-purple-800 to-pink-500"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </Button>
+                </div>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        </Routes>
+      </AnimatePresence>
     </MainLayout>
   );
 }
