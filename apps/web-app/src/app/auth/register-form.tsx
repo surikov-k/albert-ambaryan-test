@@ -16,8 +16,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { registerSchema } from "../../schema";
+import Captcha from "./captcha";
 import CardWrapper from "./card-wrapper";
-import { useCaptcha, useFormSubmit } from "./hooks";
+import { useFormSubmit } from "./hooks";
 
 interface LoginFormsProps {
   onRegister: () => void;
@@ -25,7 +26,6 @@ interface LoginFormsProps {
 
 export default function RegisterForm({ onRegister }: LoginFormsProps) {
   const { handleFormSubmit } = useFormSubmit();
-  const captcha = useCaptcha();
 
   const form = useForm({
     resolver: zodResolver(registerSchema),
@@ -118,11 +118,7 @@ export default function RegisterForm({ onRegister }: LoginFormsProps) {
           </div>
 
           <div className="space-y-2">
-            <img
-              src={`data:image/svg+xml;utf8,${encodeURIComponent(captcha || "")}`}
-              alt="CAPTCHA"
-              className="h-24 w-full rounded-md border object-contain py-1"
-            />
+            <Captcha />
             <FormField
               name="captcha"
               control={form.control}
